@@ -10,10 +10,44 @@ async function run(input, output, opts = {}) {
   equal(result.warnings().length, 0)
 }
 
-/* Write tests here
+/* Write tests here */
 
-test('does something', async () => {
-  await run('a{ }', 'a{ }', { })
-})
+test('vh polyfill (svh, lvh, dvh)', async () => {
+  await run(
+    'a{ height: 50svh; }',
+    'a{ height: 50vh; height: 50svh; }',
+    {}
+  )
 
-*/
+  await run(
+    'a{ height: 50lvh; }',
+    'a{ height: 50vh; height: 50lvh; }',
+    {}
+  )
+
+  await run(
+    'a{ height: 50dvh; }',
+    'a{ height: 50vh; height: 50dvh; }',
+    {}
+  )
+});
+
+test('vw polyfill (svw, lvw, dvw)', async () => {
+  await run(
+    'a{ width: 50svw; }',
+    'a{ width: 50vw; width: 50svw; }',
+    {}
+  )
+
+  await run(
+    'a{ width: 50lvw; }',
+    'a{ width: 50vw; width: 50lvw; }',
+    {}
+  )
+
+  await run(
+    'a{ width: 50dvw; }',
+    'a{ width: 50vw; width: 50dvw; }',
+    {}
+  )
+});

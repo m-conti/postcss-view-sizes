@@ -1,7 +1,7 @@
 {
   "name": "postcss-view-sizes",
-  "version": "0.0.0",
-  "description": "PostCSS plugin size based on the view polyfill",
+  "version": "1.0.0",
+  "description": "PostCSS plugin size based on the viewport polyfill",
   "keywords": ["postcss", "css", "postcss-plugin", "postcss-view-sizes"],
   "scripts": {
     "unit": "node --test index.test.js",

@@ -1,31 +1,27 @@
+
+const process = (direction) => {
+  const dynamicDirections = ['d', 'l', 's'].map((prefix) => prefix + direction);
+
+  return (decl) => {
+    dynamicDirections.forEach((dynamicDirection) => {
+      if (!decl.value.includes(dynamicDirection)) return;
+      decl.cloneBefore({ value: decl.value.replace(dynamicDirection, direction) })
+    });
+  };
+};
+
+const processHeight = process('vh');
+const processWidth = process('vw');
+
 /**
  * @type {import('postcss').PluginCreator}
  */
-module.exports = (opts = {}) => {
-  // Work with options here
-
-  return {
-    postcssPlugin: 'postcss-view-sizes',
-    /*
-    Root (root, postcss) {
-      // Transform CSS AST here
-    }
-    */
-
-    /*
-    Declaration (decl, postcss) {
-      // The faster way to find Declaration node
-    }
-    */
-
-    /*
-    Declaration: {
-      color: (decl, postcss) {
-        // The fastest way find Declaration node if you know property name
-      }
-    }
-    */
+module.exports = () => ({
+  postcssPlugin: 'postcss-view-sizes',
+  Declaration(decl) {
+    if (decl.value.includes('vh')) { processHeight(decl); }
+    if (decl.value.includes('vw')) { processWidth(decl); }
   }
-}
+})
 
 module.exports.postcss = true
